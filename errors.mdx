@@ -1,0 +1,418 @@
+---
+title: "Error Reference"
+description: "Complete guide to API error codes and troubleshooting"
+---
+
+# Error Reference
+
+Comprehensive guide to all error codes, their meanings, and solutions.
+
+## Error Response Format
+
+All errors follow this standard format:
+
+```json
+{
+  "success": false,
+  "error": {
+    "httpStatusCode": 400,
+    "code": "INVALID_URL_FORMAT",
+    "message": "URL parameter must be a valid URL",
+    "details": {}
+  }
+}
+```
+
+## Authentication Errors
+
+### MISSING_API_KEY
+
+**HTTP Status:** 401\
+**Message:** "X-API-Key header is required"
+
+**Cause:** API key not included in request headers
+
+**Solution:**
+
+```bash
+curl -X POST https://api.resets.ai/api/search \
+  --header "x-api-key: YOUR_API_KEY"
+```
+
+### INVALID_API_KEY
+
+**HTTP Status:** 401\
+**Message:** "Invalid API key provided"
+
+**Cause:** API key doesn't exist or is malformed
+
+**Solution:**
+
+- Verify your API key in the playground
+- Ensure it starts with `rst_`
+- Check for extra spaces or characters
+
+## Validation Errors
+
+### INVALID_QUERY_FORMAT
+
+**HTTP Status:** 400\
+**Message:** "Query parameter is required and must be non-empty"
+
+**Cause:** Missing or empty query string
+
+**Solution:**
+
+```json
+{
+  "query": "your search query",
+  "limitResults": 10
+}
+```
+
+### QUERY_TOO_LONG
+
+**HTTP Status:** 400\
+**Message:** "Query exceeds maximum length of 1000 characters"
+
+**Cause:** Query string longer than 1000 characters
+
+**Solution:**
+
+- Shorten your query
+- Remove unnecessary terms
+- Use more specific keywords
+
+### INVALID_URL_FORMAT
+
+**HTTP Status:** 400\
+**Message:** "URL parameter must be a valid URL"
+
+**Cause:** Malformed or missing URL scheme
+
+**Solution:**
+
+- Include `https://` or `http://`
+- Ensure proper URL encoding
+- Valid: `https://example.com`
+- Invalid: `example.com` or `www.example.com`
+
+### URL_NOT_ACCESSIBLE
+
+**HTTP Status:** 400\
+**Message:** "URL is not accessible"
+
+**Cause:** Target website is down or blocking requests
+
+**Solution:**
+
+- Verify the URL works in a browser
+- Check if site requires authentication
+- Try again later if temporarily down
+
+### PROMPT_TOO_LONG
+
+**HTTP Status:** 400\
+**Message:** "Prompt exceeds maximum length of 2500 characters"
+
+**Cause:** Page summary prompt is too long
+
+**Solution:**
+
+- Shorten your prompt
+- Focus on key extraction points
+- Current limit: 2,500 characters
+
+### SCHEMA_TOO_LARGE
+
+**HTTP Status:** 400\
+**Message:** "Schema exceeds maximum size of 2500 characters"
+
+**Cause:** JSON schema is too complex
+
+**Solution:**
+
+- Simplify schema structure
+- Remove nested objects where possible
+- Current limit: 2,500 characters
+
+### INVALID_JSON_FORMAT
+
+**HTTP Status:** 400\
+**Message:** "Schema must be valid JSON"
+
+**Cause:** JSON syntax error in schema
+
+**Solution:**
+
+- Validate JSON syntax
+- Check for missing quotes or commas
+- Use JSON validator tools
+
+### INVALID_LIMIT_RESULTS
+
+**HTTP Status:** 400\
+**Message:** "limitResults must be between 1 and 500"
+
+**Cause:** Result limit out of valid range
+
+**Solution:**
+
+```json
+{
+  "query": "search query",
+  "limitResults": 10
+}
+```
+
+### INVALID_DATE_FORMAT
+
+**HTTP Status:** 400\
+**Message:** "Date parameter must be one of: h, d, w, m, y"
+
+**Cause:** Invalid date filter code
+
+**Solution:**
+
+- Use valid codes: `h` (hour), `d` (day), `w` (week), `m` (month), `y` (year)
+- Example: `"date": "w"` for past week
+
+### INVALID_COUNTRY_CODE
+
+**HTTP Status:** 400\
+**Message:** "Invalid country code. Must be ISO 3166-1 alpha-2"
+
+**Cause:** Invalid 2-letter country code
+
+**Solution:**
+
+- Use ISO codes: `us`, `uk`, `de`, `fr`, etc.
+- Example: `"countryCode": "us"`
+
+### INVALID_LANGUAGE_CODE
+
+**HTTP Status:** 400\
+**Message:** "Invalid language code. Must be ISO 639-1"
+
+**Cause:** Invalid 2-letter language code
+
+**Solution:**
+
+- Use ISO codes: `en`, `es`, `de`, `fr`, etc.
+- Example: `"language": "en"`
+
+### INVALID_PUBLISHED_DATE
+
+**HTTP Status:** 400\
+**Message:** "Published date must be in ISO 8601 format"
+
+**Cause:** Invalid date format
+
+**Solution:**
+
+```json
+{
+  "startPublishedDate": "2024-01-01T00:00:00Z",
+  "endPublishedDate": "2024-12-31T23:59:59Z"
+}
+```
+
+## Credit & Limit Errors
+
+### INSUFFICIENT_CREDITS
+
+**HTTP Status:** 402\
+**Message:** "Not enough credits to complete this request"
+
+**Cause:** Account has insufficient credits
+
+**Solution:**
+
+- Check credit balance in playground
+- Contact support for credit top-up
+- Reduce request size to lower cost
+
+### RATE_LIMIT_EXCEEDED
+
+**HTTP Status:** 429\
+**Message:** "Rate limit exceeded for your plan"
+
+**Cause:** Too many requests per second
+
+**Solution:**
+
+- Default limit: 5 requests/second
+- Add delay between requests
+- Implement exponential backoff
+- Check `Retry-After` header
+
+## Processing Errors
+
+### EXTRACTION_FAILED
+
+**HTTP Status:** 400\
+**Message:** "Unable to extract content from the provided URL"
+
+**Cause:** All extraction services failed
+
+**Solution:**
+
+- Verify URL accessibility
+- Check if site blocks scrapers
+- Try a different URL
+- Contact support if persistent
+
+### DOMAIN_NOT_CRAWLABLE
+
+**HTTP Status:** 400\
+**Message:** "Domain cannot be crawled"
+
+**Cause:** Website actively blocks extraction
+
+**Solution:**
+
+- Some sites (like LinkedIn) require special handling
+- Try using search API instead
+- Check our supported domains list
+
+### SUSPICIOUS_DOMAIN
+
+**HTTP Status:** 400\
+**Message:** "URL contains a suspicious or potentially harmful domain"
+
+**Cause:** Security check failed
+
+**Solution:**
+
+- Verify URL is legitimate
+- Avoid IP addresses
+- Use proper domain names
+
+## Service Errors
+
+### SEARCH_SERVICE_FAILED
+
+**HTTP Status:** 500\
+**Message:** "All search services failed to respond"
+
+**Cause:** Internal service issues
+
+**Solution:**
+
+- Retry after a few seconds
+- Check status page
+- Contact support if persistent
+
+### OPENAI_API_FAILED
+
+**HTTP Status:** 500\
+**Message:** "AI processing failed"
+
+**Cause:** OpenAI service error
+
+**Solution:**
+
+- Retry the request
+- Simplify schema/prompt
+- Try without AI enhancement
+
+### REQUEST_TIMEOUT
+
+**HTTP Status:** 408\
+**Message:** "Request processing timeout"
+
+**Cause:** Request took longer than 30 seconds
+
+**Solution:**
+
+- Reduce result limit
+- Simplify extraction schema
+- Break into smaller requests
+
+### INTERNAL_SERVER_ERROR
+
+**HTTP Status:** 500\
+**Message:** "An unexpected error occurred"
+
+**Cause:** Unhandled server error
+
+**Solution:**
+
+- Retry the request
+- Report to support with request ID
+- Check status page
+
+## Debugging Tips
+
+### Check Request Headers
+
+```bash
+curl -v -X POST https://api.resets.ai/api/search \
+  --header "content-type: application/json" \
+  --header "x-api-key: YOUR_API_KEY"
+```
+
+### Validate JSON
+
+```javascript
+try {
+  JSON.parse(yourSchema);
+} catch (e) {
+  console.error("Invalid JSON:", e.message);
+}
+```
+
+### Handle Errors Gracefully
+
+```javascript
+const response = await fetch(url, options);
+
+if (!response.ok) {
+  const error = await response.json();
+  console.error(`Error ${error.error.code}: ${error.error.message}`);
+  
+  // Handle specific errors
+  switch (error.error.code) {
+    case 'RATE_LIMIT_EXCEEDED':
+      // Wait and retry
+      break;
+    case 'INSUFFICIENT_CREDITS':
+      // Alert user
+      break;
+    default:
+      // Generic handling
+  }
+}
+```
+
+## Getting Help
+
+### Before Contacting Support
+
+1. Check error code and message
+2. Verify API key is valid
+3. Test with minimal parameters
+4. Try the playground
+
+### Information to Provide
+
+- Request ID from error response
+- Full error message
+- Request parameters (without API key)
+- Time of occurrence
+
+### Support Channels
+
+- Email: [hello@resets.ai](mailto:support@resets.ai)
+
+## Quick Reference
+
+| Error Code            | HTTP | Category   | Quick Fix                  |
+| --------------------- | ---- | ---------- | -------------------------- |
+| MISSING_API_KEY       | 401  | Auth       | Add X-API-Key header       |
+| INVALID_API_KEY       | 401  | Auth       | Check key in playground    |
+| INSUFFICIENT_CREDITS  | 402  | Credits    | Add credits to account     |
+| RATE_LIMIT_EXCEEDED   | 429  | Limits     | Add delay between requests |
+| INVALID_URL_FORMAT    | 400  | Validation | Include https://           |
+| EXTRACTION_FAILED     | 400  | Service    | Try different URL          |
+| INTERNAL_SERVER_ERROR | 500  | Server     | Retry request              |
