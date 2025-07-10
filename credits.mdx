@@ -1,0 +1,234 @@
+---
+title: "Credits & Pricing"
+description: "Understanding credit costs, usage tracking, and pricing plans"
+---
+
+# Credits & Pricing
+
+Simple, transparent pricing based on usage. Pay only for what you use.
+
+## How Credits Work
+
+Credits are the currency of our platform. Each API operation consumes credits based on complexity.
+
+### Credit Costs
+
+| Operation               | Credits                | Description                                                                                    |
+| ----------------------- | ---------------------- | ---------------------------------------------------------------------------------------------- |
+| Search (Basic)          | 5 per 100 results      | Multi-engine search without AI                                                                 |
+| Search \+ Page Summary  | 5 per 100 results \+ 1 | Search with structured page summary extraction (limited to the first 25 results from the page) |
+| Extract (Basic)         | 1                      | URL content content extraction                                                                 |
+| Extract \+ Page Summary | 2                      | Extraction with AI processing                                                                  |
+| Failed Operations       | 0                      | No charge for failures                                                                         |
+
+#### Search Credit Examples
+
+- 100 results = 5 credits
+- 200 results = 10 credits
+
+### No Charge Policy
+
+<Info>
+  **You're only charged when operations succeed for most operations and service that support that feature**
+
+  - ❌ Failed extractions = 0 credits
+  - ❌ ✅  Inaccessible URLs = 0/1 credits
+  - ❌ Service errors = 0 credits
+  - ✅ Successful data returned = Credits charged
+</Info>
+
+## Getting Started
+
+### Free Credits
+
+New users receive **250 free credits** instantly:
+
+1. Enter email in playground
+2. Get 250 credits immediately
+3. No credit card required
+
+### What Can You Do With Credits?
+
+| Credits | You Can...                       |
+| ------- | -------------------------------- |
+| 250     | 5000 search results              |
+| 250     | 250 URL extractions (without AI) |
+
+## Usage Tracking
+
+### Check Your Balance
+
+#### In the Playground
+
+- Credit count displayed in header
+- Updates in real-time
+- Shows after each operation
+
+#### Via API Response
+
+Every API response includes credit usage:
+
+```json
+{
+  "metadata": {
+    "costCredits": 5,
+    "responseTime": 1.234
+  }
+}
+```
+
+### Usage History
+
+Track your credit consumption:
+
+- View in Activity Logs
+- Export usage reports
+- Monitor trends over time
+
+## Credit Optimization
+
+### Search Optimization
+
+<Tip>
+  **Smart Credit Usage for Search**
+
+  - Start with smaller result limits to test queries
+  - 10-100 results = 1 credit (great for testing)
+  - Scale up only when needed
+  - Use strctured json selectively
+</Tip>
+
+#### Cost-Effective Strategies
+
+```json
+// Test with minimal credits
+{
+  "query": "test query",
+  "limitResults": 10  // Only 1 credit
+}
+
+// Then scale up
+{
+  "query": "refined query",
+  "limitResults": 100  // 5 credits
+}
+```
+
+### Extract Optimization
+
+#### Single URL First
+
+Test extraction on one URL before batch processing:
+
+```json
+{
+  "url": "https://example.com",
+  "pageSummary": {
+    "schema": { "title": "string" }
+  }
+}
+```
+
+## Plans & Billing
+
+### Current Offering
+
+During beta, we offer:
+
+- **Pay as you go** - Add credits as needed
+- **No monthly fees** - Only pay for usage
+- **No expiration** - Credits never expire
+
+### Enterprise Options
+
+For high-volume users:
+
+- Custom credit packages
+- Dedicated support
+- SLA guarantees
+- Priority processing
+
+Contact [hello@resets.ai](mailto:sales@resets.ai) for details.
+
+## Common Questions
+
+### Do credits expire?
+
+No, credits never expire. Use them at your own pace.
+
+### What happens at 0 credits?
+
+API requests return `INSUFFICIENT_CREDITS` error. Add more credits to continue.
+
+### Can I get a refund?
+
+Credits are non-refundable but never expire.
+
+### Is there a free tier?
+
+Yes\! 250 free credits for all new users.
+
+### How do I monitor usage?
+
+- Real-time in playground header
+- API response metadata
+- Activity logs
+
+## Cost Examples
+
+### Lead Generation Campaign
+
+Find 1,000 LinkedIn companies with AI extraction:
+
+```
+Search: 1,000 results = 50 credits
+AI Processing: +1 credit
+Total: 51 credits
+```
+
+### Market Research Project
+
+Extract data from 50 competitor websites:
+
+```
+Extract: 50 URLs = 50 credits
+AI Processing: +50 credits
+Total: 100 credits
+```
+
+### News Monitoring (Daily)
+
+Track 100 news results daily for a month:
+
+```
+Daily: 100 results = 5 credits
+Monthly: 5 × 30 = 150 credits
+With AI: 150 + 30 = 180 credits
+```
+
+## Tips for Credit Efficiency
+
+<Info>
+  **Best Practices**
+
+  1. **Test Small** - Start with 10 results
+  2. **Refine Queries** - Better queries = better results
+  3. **Batch Similar** - Group similar extractions
+  4. **Monitor Failures** - Failed operations don't cost credits
+  5. **Use AI Wisely** - Only when structured data needed
+</Info>
+
+## Need Help?
+
+- **Email**: [support@resets.ai](mailto:support@resets.ai)
+- **Playground**: Test queries before using credits
+- **Documentation**: Optimization guides available
+
+<Warning>
+  **Credit Usage Notes**
+
+  - Credits deducted immediately on success
+  - No partial credit refunds
+  - Failed operations never charged
+  - Monitor usage to avoid surprises
+</Warning>
