@@ -43,8 +43,8 @@
           {
             "group": "API Documentation",
             "pages": [
-              "api-referecne/search",
-              "api-referecne/extract"
+              "/api-reference/search",
+              "/api-reference/extract"
 
             ]
           }
