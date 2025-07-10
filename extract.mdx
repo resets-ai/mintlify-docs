@@ -1,0 +1,546 @@
+---
+title: "Extract"
+description: "Extract content from any website with 99% success rate using intelligent routing"
+---
+
+# Extract API
+
+Extract content from any URL using our waterfall routing system that automatically adapts to website changes.
+
+## Overview
+
+Our extract API uses intelligent routing to ensure maximum success:
+
+- **Waterfall System** - Tries multiple extraction services
+- **Learning Routes** - Improves routing based on success patterns
+- **99% Coverage** - Auto service selections which handle stealth modes, CAPTCHA resolvers, proxy rotations, website blocking and JS rendering
+- **Fast Response** - Get content in markdown LLM ready format in ~2.5 - 10 seconds
+- **Structured Data Extraction** - Optional structured data extraction
+
+## Basic Extraction
+
+Extract content from any  website. Just provide the URL /extract handles everything in the backend, no complex setup or testing and trying different services:
+
+<CodeGroup>
+
+```bash curl
+curl -X POST https://api.resets.ai/api/extract \
+  --header "content-type: application/json" \
+  --header "x-api-key: YOUR_API_KEY" \
+  --data '{
+    "url": "https://techcrunch.com/2024/03/15/ai-startup-news"
+}'
+```
+
+
+```javascript javascript
+const response = await fetch('https://api.resets.ai/api/extract', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    url: "https://techcrunch.com/2024/03/15/ai-startup-news"
+  })
+});
+const data = await response.json();
+console.log(data);
+```
+
+
+```python python
+import requests
+import json
+url = "https://api.resets.ai/api/extract"
+headers = {
+    "Content-Type": "application/json",
+    "X-API-Key": "YOUR_API_KEY"
+}
+data = {
+    "url": "https://techcrunch.com/2024/03/15/ai-startup-news"
+}
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+
+</CodeGroup>
+
+## Request Parameters
+
+| Parameter          | Type          | Required | Default | Description                                        |
+| ------------------ | ------------- | -------- | ------- | -------------------------------------------------- |
+| url                | string        | Yes      | -       | URL to extract content from                        |
+| pageSummary        | object        | No       | -       | AI processing configuration                        |
+| pageSummary.prompt | string        | No       | -       | Extraction instructions (max 2500 chars)           |
+| pageSummary.schema | object/string | No       | -       | JSON schema for structured output (max 2500 chars) |
+
+## AI-Enhanced Extraction
+
+### With Custom Prompt
+
+Extract specific information using natural language:
+
+<CodeGroup>
+
+```bash curl
+curl -X POST https://api.resets.ai/api/extract \
+  --header "content-type: application/json" \
+  --header "x-api-key: YOUR_API_KEY" \
+  --data '{
+    "url": "https://www.ycombinator.com/companies/openai",
+    "pageSummary": {
+        "prompt": "Extract company details including founding year, founders, funding amount, and key products"
+    }
+}'
+```
+
+
+```javascript javascript
+const response = await fetch('https://api.resets.ai/api/extract', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    url: "https://www.ycombinator.com/companies/openai",
+    pageSummary: {
+        prompt: "Extract company details including founding year, founders, funding amount, and key products"
+    }
+  })
+});
+const data = await response.json();
+console.log(data);
+```
+
+
+```python python
+import requests
+import json
+url = "https://api.resets.ai/api/extract"
+headers = {
+    "Content-Type": "application/json",
+    "X-API-Key": "YOUR_API_KEY"
+}
+data = {
+    "url": "https://www.ycombinator.com/companies/openai",
+    "pageSummary": {
+        "prompt": "Extract company details including founding year, founders, funding amount, and key products"
+    }
+}
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+
+</CodeGroup>
+
+### With Structured Schema
+
+Get data in a specific format:
+
+<CodeGroup>
+
+```bash curl
+curl -X POST https://api.resets.ai/api/extract \
+  --header "content-type: application/json" \
+  --header "x-api-key: YOUR_API_KEY" \
+  --data '{
+    "url": "https://www.linkedin.com/company/anthropic",
+    "pageSummary": {
+        "prompt": "Extract company information",
+        "schema": {
+            "company": "string",
+            "industry": "string",
+            "size": "string",
+            "headquarters": "string",
+            "founded": "string",
+            "description": "string",
+            "specialties": ["string"]
+        }
+    }
+}'
+```
+
+
+```javascript javascript
+const response = await fetch('https://api.resets.ai/api/extract', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    url: "https://www.linkedin.com/company/anthropic",
+    pageSummary: {
+        prompt: "Extract company information",
+        schema: {
+            company: "string",
+            industry: "string",
+            size: "string",
+            headquarters: "string",
+            founded: "string",
+            description: "string",
+            specialties: ["string"]
+        }
+    }
+  })
+});
+const data = await response.json();
+console.log(data);
+```
+
+
+```python python
+import requests
+import json
+url = "https://api.resets.ai/api/extract"
+headers = {
+    "Content-Type": "application/json",
+    "X-API-Key": "YOUR_API_KEY"
+}
+data = {
+    "url": "https://www.linkedin.com/company/anthropic",
+    "pageSummary": {
+        "prompt": "Extract company information",
+        "schema": {
+            "company": "string",
+            "industry": "string",
+            "size": "string",
+            "headquarters": "string",
+            "founded": "string",
+            "description": "string",
+            "specialties": ["string"]
+        }
+    }
+}
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+
+</CodeGroup>
+
+### Schema-Only Extraction
+
+<Info>
+  **Smart Default Prompt**
+
+  When you provide only a schema without a prompt, we automatically generate: "You are an experienced data extraction analyst, extract data from the provided content using the provided json schema. If information for a field is not available leave it as empty"
+</Info>
+
+<CodeGroup>
+
+```bash curl
+curl -X POST https://api.resets.ai/api/extract \
+  --header "content-type: application/json" \
+  --header "x-api-key: YOUR_API_KEY" \
+  --data '{
+    "url": "https://example.com/team",
+    "pageSummary": {
+        "schema": {
+            "team": [{
+                "name": "string",
+                "role": "string",
+                "email": "string",
+                "linkedin": "string"
+            }]
+        }
+    }
+}'
+```
+
+
+```javascript javascript
+const response = await fetch('https://api.resets.ai/api/extract', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    url: "https://example.com/team",
+    pageSummary: {
+        schema: {
+            team: [{
+                name: "string",
+                role: "string",
+                email: "string",
+                linkedin: "string"
+            }]
+        }
+    }
+  })
+});
+const data = await response.json();
+console.log(data);
+```
+
+
+```python python
+import requests
+import json
+url = "https://api.resets.ai/api/extract"
+headers = {
+    "Content-Type": "application/json",
+    "X-API-Key": "YOUR_API_KEY"
+}
+data = {
+    "url": "https://example.com/team",
+    "pageSummary": {
+        "schema": {
+            "team": [{
+                "name": "string",
+                "role": "string",
+                "email": "string",
+                "linkedin": "string"
+            }]
+        }
+    }
+}
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+
+</CodeGroup>
+
+## Response Structure
+
+### Basic Extraction Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "requestId": "650e8400-e29b-41d4-a716-446655440001",
+    "result": {
+      "url": "https://techcrunch.com/2024/03/15/ai-startup-news",
+      "title": "AI Startup Raises $100M Series C",
+      "content": "Full article content here...",
+      "extractedAt": "2024-03-15T10:32:00Z",
+      "processingTime": 0.823
+    }
+  },
+  "metadata": {
+    "costCredits": 1,
+    "responseTime": 0.823,
+    "domain": "techcrunch.com",
+    "httpStatusCode": 200,
+    "pageSummaryProcessed": false
+  }
+}
+```
+
+### With AI Enhancement
+
+```json
+{
+  "success": true,
+  "data": {
+    "requestId": "750e8400-e29b-41d4-a716-446655440002",
+    "result": {
+      "url": "https://www.linkedin.com/company/anthropic",
+      "title": "Anthropic | LinkedIn",
+      "content": "Full page content here...",
+      "extractedAt": "2024-03-15T10:33:00Z",
+      "processingTime": 1.234,
+      "pageSummary": {
+        "company": "Anthropic",
+        "industry": "Artificial Intelligence",
+        "size": "51-200 employees",
+        "headquarters": "San Francisco, CA",
+        "founded": "2021",
+        "description": "AI safety company focused on building reliable, interpretable, and steerable AI systems",
+        "specialties": ["AI Safety", "Large Language Models", "Constitutional AI"]
+      }
+    }
+  },
+  "metadata": {
+    "costCredits": 2,
+    "responseTime": 1.234,
+    "domain": "linkedin.com",
+    "httpStatusCode": 200,
+    "pageSummaryProcessed": true
+  }
+}
+```
+
+## Waterfall Routing System
+
+Our extraction service automatically selects the best route for each domain:
+
+1. **Domain Analysis** - Identifies the website domain
+2. **Route Selection** - Checks preferred routes database
+3. **Sequential Attempts** - Tries services in order (Jina → EXA → Fallback)
+4. **Learning Updates** - Records success/failure for future optimization
+
+### Supported Content Types
+
+- **Web Pages** - HTML content from any website
+- **PDFs** - Automatic text extraction from PDF documents
+- **Dynamic Content** - JavaScript-rendered pages
+- **Protected Content** - Some authentication-required pages
+
+## Common Extraction Patterns
+
+### Company Profile Extraction
+
+```json
+{
+  "url": "https://www.linkedin.com/company/tesla",
+  "pageSummary": {
+    "schema": {
+      "name": "string",
+      "industry": "string",
+      "employees": "string",
+      "headquarters": "string",
+      "website": "string",
+      "about": "string"
+    }
+  }
+}
+```
+
+### News Article Analysis
+
+```json
+{
+  "url": "https://techcrunch.com/latest-article",
+  "pageSummary": {
+    "prompt": "Extract article metadata and key points",
+    "schema": {
+      "headline": "string",
+      "author": "string",
+      "publishDate": "string",
+      "summary": "string",
+      "keyPoints": ["string"],
+      "companies": ["string"],
+      "funding": "string"
+    }
+  }
+}
+```
+
+### Contact Information Scraping
+
+```json
+{
+  "url": "https://example.com/about-us",
+  "pageSummary": {
+    "schema": {
+      "contacts": [{
+        "name": "string",
+        "title": "string",
+        "email": "string",
+        "phone": "string"
+      }],
+      "address": "string",
+      "socialMedia": {
+        "linkedin": "string",
+        "twitter": "string"
+      }
+    }
+  }
+}
+```
+
+### Product Details Extraction
+
+```json
+{
+  "url": "https://example.com/product/details",
+  "pageSummary": {
+    "prompt": "Extract all product information",
+    "schema": {
+      "productName": "string",
+      "price": "string",
+      "description": "string",
+      "features": ["string"],
+      "specifications": {
+        "dimensions": "string",
+        "weight": "string",
+        "material": "string"
+      },
+      "availability": "string"
+    }
+  }
+}
+```
+
+## Best Practices
+
+<Info>
+  **Optimization Tips**
+
+  - Use specific prompts for better accuracy
+  - Keep schemas simple and focused
+  - Test your schemas in the playground first
+  - Reuse successful schemas across similar pages
+</Info>
+
+<Warning>
+  **Content Limits**
+
+  - Content is truncated to 200,000 characters
+  - Prompt limited to 2,500 characters
+  - Schema limited to 2,500 characters
+  - Large pages may have content cut off
+</Warning>
+
+## Error Handling
+
+| Error Code          | Description              | Solution                     |
+| ------------------- | ------------------------ | ---------------------------- |
+| INVALID_URL_FORMAT  | URL is malformed         | Ensure URL includes https:// |
+| URL_NOT_ACCESSIBLE  | Cannot reach the URL     | Check if site is online      |
+| EXTRACTION_FAILED   | All services failed      | Try a different URL or retry |
+| PROMPT_TOO_LONG     | Prompt exceeds limit     | Keep under 2,500 characters  |
+| SCHEMA_TOO_LARGE    | Schema exceeds limit     | Simplify your schema         |
+| INVALID_JSON_FORMAT | Schema is not valid JSON | Validate JSON syntax         |
+
+## Advanced Features
+
+### Batch Extraction
+
+For multiple URLs, use the playground's table view:
+
+1. Search for URLs
+2. Select URLs to extract
+3. Configure extraction settings
+4. Process in batches of 15
+
+### Run Management
+
+Track extraction history:
+
+- View past extraction runs
+- Export results as CSV
+- Reuse successful configurations
+
+## Credit Usage
+
+| Operation           | Credits   |
+| ------------------- | --------- |
+| Basic extraction    | 1 credit  |
+| With AI enhancement | 2 credits |
+| Failed extraction   | 0 credits |
+
+<Note>
+  **No charge on failure** - You're only charged credits when extraction successfully returns data
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Playground" icon="play" href="/playground">
+    Test extractions visually before coding
+  </Card>
+  <Card title="Schema Design" icon="code" href="/guides/schema-design">
+    Learn to create effective extraction schemas
+  </Card>
+  <Card title="Batch Processing" icon="layer-group" href="/guides/batch-extraction">
+    Extract from multiple URLs efficiently
+  </Card>
+  <Card title="Best Practices" icon="lightbulb" href="/guides/best-practices">
+    Optimize your extraction workflows
+  </Card>
+</CardGroup>

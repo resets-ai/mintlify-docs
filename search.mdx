@@ -9,11 +9,11 @@ Search across multiple engines simultaneously and get unified, deduplicated resu
 
 ## Overview
 
-Our search API orchestrates queries across three powerful search engines:
+Our search API
 
-- **Serper** - Google search results with rich metadata
-- **EXA** - Neural search for semantic understanding
-- **Jina** - Advanced search with content extraction
+- **Orchestration**: orchestrates queries across three powerful search engines using free form query or strctured queries, similar to searching google.
+- **Search Type** - Hybrid search using Keyword and LLM search engines for maximu coverage
+- **Smart Routing** - Automatically detectedsearch keywords to focus user
 
 All results are automatically deduplicated, ranked, and can be enhanced with AI-powered summaries.
 
@@ -83,7 +83,7 @@ Simple text-based search - just like using Google:
 }
 ```
 
-### Structured Query (LinkedIn Search)
+### Structured Site Query
 
 Use site prefixes for targeted searches:
 
@@ -149,18 +149,16 @@ Combine terms with AND, OR, NOT:
 
 ## Request Parameters
 
-| Parameter          | Type    | Required | Default | Description                     |
-| ------------------ | ------- | -------- | ------- | ------------------------------- |
-| query              | string  | Yes      | -       | Search query (1-1000 chars)     |
-| limitResults       | integer | No       | 10      | Results to return (1-500)       |
-| date               | string  | No       | -       | Time filter: h, d, w, m, y      |
-| countryCode        | string  | No       | -       | ISO country code (us, uk, etc)  |
-| language           | string  | No       | -       | ISO language code (en, es, etc) |
-| startPublishedDate | string  | No       | -       | ISO date for range start        |
-| endPublishedDate   | string  | No       | -       | ISO date for range end          |
-| pageSummary        | object  | No       | -       | AI processing configuration     |
-
-## Advanced Parameters
+| Parameter          | Type    | Required | Default | Description                                      |
+| ------------------ | ------- | -------- | ------- | ------------------------------------------------ |
+| query              | string  | Yes      | -       | Search query (1-1000 chars)                      |
+| limitResults       | integer | No       | 10      | Results to return (1-500, 100 Max for Free plan) |
+| date               | string  | No       | -       | Time filter: h, d, w, m, y                       |
+| countryCode        | string  | No       | -       | ISO country code (us, uk, etc)                   |
+| language           | string  | No       | -       | ISO language code (en, es, etc)                  |
+| startPublishedDate | string  | No       | -       | ISO date for range start                         |
+| endPublishedDate   | string  | No       | -       | ISO date for range end                           |
+| pageSummary        | object  | No       | -       | AI processing configuration                      |
 
 ### Date Filtering
 
@@ -228,7 +226,7 @@ print(result)
 
 ### Location & Language
 
-Target specific markets:
+Target specific location and language:
 
 ```json
 {
@@ -239,20 +237,7 @@ Target specific markets:
 }
 ```
 
-### Date Range Filtering
-
-Precise date control:
-
-```json
-{
-  "query": "AI breakthroughs",
-  "limitResults": 20,
-  "startPublishedDate": "2024-01-01T00:00:00Z",
-  "endPublishedDate": "2024-12-31T23:59:59Z"
-}
-```
-
-## AI-Enhanced Search
+## Search - Structured JSON Page Summary 
 
 Add structured data extraction to any search:
 
@@ -470,7 +455,7 @@ print(result)
 <Warning>
   **Rate Limits**
 
-  - Default: 5 requests per second
+  - Default: 5 requests per second for Free plan
   - Respect 429 responses and retry after delay
 </Warning>
 
