@@ -1,0 +1,298 @@
+---
+title: "Playground"
+description: "Test search and extraction features with our visual interface"
+---
+
+# Playground
+
+The playground provides a visual interface to test search queries and extract content before implementing in code.
+
+## Getting Started
+
+### Access the Playground
+
+1. Visit [resets.ai](https://playground.resets.ai)
+2. Click Run or Get API Key Button
+3. Enter your email to create a session and get 250 free credits
+4. Start searching or extracting immediately
+
+### Interface Overview
+
+- **Header Navigation** - Switch between Cards/Table view and view credits
+- **Left Panel** - Search configuration and query builder
+- **Right Panel** - Results display and code generation
+- **Table View** - Batch extraction for a search and run management
+
+## Search Playground
+
+### Query Modes
+
+The playground offers two ways to build searches:
+
+#### Get Suggestions Mode
+
+Build structured queries with guided segments:
+
+<Steps>
+  <Step title="Select Search Type">
+    Choose from Companies, People, Jobs, or News
+  </Step>
+  <Step title="Fill Segments">
+    Add keywords to relevant fields (company names, roles, locations, etc.)
+  </Step>
+  <Step title="Preview Query">
+    See your structured query with boolean operators
+  </Step>
+  <Step title="Run Search">
+    Execute and see results from all search engines
+  </Step>
+</Steps>
+
+#### Query Mode
+
+Direct text input for complex searches:
+
+- Freeform text area
+- Boolean operators (AND, OR, NOT)
+- Site filters (site:linkedin.com)
+- Parentheses for grouping
+
+### Search Configuration
+
+#### Basic Options
+
+- **Results Limit** - 1 to 500 results (Free plan limited to 100 results for now)
+- **Search Engines** - Automatic selection of search engines for comprehensive results coverage
+
+#### Advanced Filters
+
+- **Date Range** - Filter by publication date
+- **Country Code** - Target specific regions (us, uk, de, etc.)
+- **Language** - Filter by content language
+- **Time Filters** - Quick options (past hour, day, week, month, year)
+
+### Structured JSON Response Schema 
+
+Add structured extraction to search results:
+
+1. **Enable Page Summary** - Toggle on AI processing
+2. **Add Prompt** - Describe what to extract (optional)
+3. **Define Schema** - JSON schema for structured output
+4. **Validate** - Check schema syntax before running
+
+Example schema:
+
+```json
+{
+  "company": "string",
+  "industry": "string",
+  "funding": "string",
+  "employees": "string"
+}
+```
+
+## Results Display
+
+### Cards View
+
+Default view showing:
+
+- **Search Results** - Title, URL, snippet, date
+- **Response Details** - Request ID, processing time, credits used
+- **Code Generation** - Auto-generated API code
+- **Export Options** - Copy JSON, download results
+
+### Response Formats
+
+Toggle between:
+
+- **JSON** - Raw API response
+- **Pretty** - Formatted, readable display
+- CSV - CSV formatted results
+
+### Code Generation
+
+Automatically generates code in three languages:
+
+- **curl** - Command line
+- **JavaScript** - Fetch API
+- **Python** - Requests library
+
+Features:
+
+- Language toggle buttons
+- Copy button for quick clipboard access
+- API key masking for security
+- Exact parameter matching
+
+## Table View
+
+### Overview
+
+Switch to table view for:
+
+- Bulk operations
+- Extract processing
+- Run history management
+- CSV exports
+
+### Extract Sidebar
+
+Configure extraction settings:
+
+<Info>
+  **Extract Configuration**
+
+  - **Prompt** - Natural language instructions (max 2,500 chars)
+  - **JSON Schema** - Structured output format (max 2,500 chars)
+  - **Validation** - Real-time schema syntax checking
+</Info>
+
+Extract controls:
+
+- **Extract All** - Process first 15 URLs
+- **Extract More** - Continue with next batch
+- **Progress Bar** - Real-time status updates
+- **Minimize Toggle** - Collapse sidebar when not needed
+
+### Table Features
+
+#### Column Management
+
+- **Dynamic Columns** - Auto-generated from extracted data
+- **Sortable Headers** - Click to sort any column
+- **Resizable Columns** - Drag to adjust width
+- **Search Filter** - Find specific results
+
+### Run History
+
+Access previous extraction runs:
+
+1. **RunSelector Dropdown** - Shows all extraction runs
+2. **Run Format** - "Run abc...xyz (15/50) - 2 hrs ago"
+3. **Search Filter** - Runs marked with • for current search
+4. **Load Run** - Click to view past results
+
+Features:
+
+- View runs from any search session
+- Track processing progress
+- Reuse successful configurations
+- Export data into CSV
+
+## Extract Playground
+
+### Single URL Extraction
+
+From the search interface:
+
+1. Switch to Extract mode
+2. Enter target URL
+3. Configure page summary (optional)
+4. Run extraction
+
+### Batch Extraction
+
+From table view:
+
+1. Run a search query
+2. Switch to Table view
+3. Configure extraction in sidebar
+4. Click "Extract All"
+
+Processing:
+
+- 15 URLs per batch
+- 5 concurrent requests
+- Automatic queuing
+- Real-time progress
+
+### Export Options
+
+Download your data:
+
+- **CSV Format** - Spreadsheet compatible
+- **JSON Format** - Full structured data
+- **Dynamic Columns** - All extracted fields included
+
+## Session Management
+
+### Getting Started
+
+- Enter email for instant access
+- Receive 250 free credits
+- No signup or credit card required
+
+### Credit Tracking
+
+- View remaining credits in header
+- 5 credits per 100 search results
+- 1 credit for extract
+- 1 credit for extract strctrued JSON
+- No charge on most failed extractions
+
+### Activity Features
+
+- **Activity Logs** - Track all operations
+- **Session Persistence** - Resume where you left off
+- **Not You?** - Switch accounts easily
+
+## Tips & Tricks
+
+<Tip>
+  **Search Optimization**
+
+  - Use structured mode for site specific searches such as LinkedIn, Crunchabse, Pitchbook etc... searches
+  - Combine boolean operators for precision
+  - Test schemas on single URLs first
+  - Save successful schemas for reuse
+</Tip>
+
+<Warning>
+  **Common Issues**
+
+  - Validate JSON schemas before running
+  - Check URL accessibility
+  - Monitor credit usage
+  - Export data regularly
+</Warning>
+
+## Best Practices
+
+### For Search
+
+1. Start with broad queries, then refine
+2. Use site operators for targeted results
+3. Test small batches before large searches
+4. Export results for offline analysis
+
+### For Extraction
+
+1. Validate schemas in playground first
+2. Process in 15-URL batches
+3. Monitor extraction status
+4. Use run history for retry logic
+
+### For Development
+
+1. Copy working code from playground
+2. Test edge cases visually
+3. Verify schemas before production
+4. Track successful patterns
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="API Reference" icon="code" href="/api/search">
+    Implement searches in your application
+  </Card>
+  <Card title="Schema Design" icon="diagram-project" href="/guides/schema-design">
+    Create effective extraction schemas
+  </Card>
+  <Card title="Batch Processing" icon="layer-group" href="/guides/batch-processing">
+    Scale up your operations
+  </Card>
+  <Card title="Best Practices" icon="lightbulb" href="/guides/best-practices">
+    Optimize your workflows
+  </Card>
+</CardGroup>
