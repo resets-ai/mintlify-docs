@@ -223,9 +223,9 @@ print(response.json())
 ### Schema-Only Extraction
 
 <Info>
-  **Smart Default Prompt**
+  **Default Prompt**
 
-  When you provide only a schema without a prompt, we automatically generate: "You are an experienced data extraction analyst, extract data from the provided content using the provided json schema. If information for a field is not available leave it as empty"
+  Provide only a schema without a prompt we automatically get website contents based on the schema with no prompt required.
 </Info>
 
 <CodeGroup>
@@ -330,7 +330,7 @@ print(response.json())
 }
 ```
 
-### With AI Enhancement
+### Optional  - Strcutured JSON Extract
 
 ```json
 {
@@ -370,15 +370,14 @@ Our extraction service automatically selects the best route for each domain:
 
 1. **Domain Analysis** - Identifies the website domain
 2. **Route Selection** - Checks preferred routes database
-3. **Sequential Attempts** - Tries services in order (Jina → EXA → Fallback)
+3. **Sequential Attempts** - Tries services in order (Service 1 → Service 2 → Fallback)
 4. **Learning Updates** - Records success/failure for future optimization
 
 ### Supported Content Types
 
 - **Web Pages** - HTML content from any website
-- **PDFs** - Automatic text extraction from PDF documents
 - **Dynamic Content** - JavaScript-rendered pages
-- **Protected Content** - Some authentication-required pages
+- **Protected Content** - Challenge-required pages
 
 ## Common Extraction Patterns
 
@@ -478,7 +477,7 @@ Our extraction service automatically selects the best route for each domain:
 </Info>
 
 <Warning>
-  **Content Limits**
+  **Beta Content Limits**
 
   - Content is truncated to 200,000 characters
   - Prompt limited to 2,500 characters
@@ -525,7 +524,7 @@ Track extraction history:
 | Failed extraction   | 0 credits |
 
 <Note>
-  **No charge on failure** - You're only charged credits when extraction successfully returns data
+  **No charge on failure** - In most cases you are only charged credits when extraction successfully returns data. Some services do charge a small amount even if no content is extracted. We try to limit this as much as possible.
 </Note>
 
 ## Next Steps
