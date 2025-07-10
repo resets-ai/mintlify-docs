@@ -1,0 +1,502 @@
+---
+title: "Search"
+description: "Master multi-engine search with AI-powered enhancements"
+---
+
+# Search API
+
+Search across multiple engines simultaneously and get unified, deduplicated results with optional AI processing.
+
+## Overview
+
+Our search API orchestrates queries across three powerful search engines:
+
+- **Serper** - Google search results with rich metadata
+- **EXA** - Neural search for semantic understanding
+- **Jina** - Advanced search with content extraction
+
+All results are automatically deduplicated, ranked, and can be enhanced with AI-powered summaries.
+
+## Basic Search
+
+Make a simple search across all engines:
+
+<CodeGroup>
+
+```bash curl
+curl -X POST https://api.resets.ai/api/search \
+  --header "content-type: application/json" \
+  --header "x-api-key: YOUR_API_KEY" \
+  --data '{
+    "query": "artificial intelligence companies",
+    "limitResults": 10
+}'
+```
+
+
+```javascript javascript
+const response = await fetch('https://api.resets.ai/api/search', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    query: "artificial intelligence companies",
+    limitResults: 10
+  })
+});
+const data = await response.json();
+console.log(data);
+```
+
+
+```python python
+import requests
+import json
+url = "https://api.resets.ai/api/search"
+headers = {
+    "Content-Type": "application/json",
+    "X-API-Key": "YOUR_API_KEY"
+}
+data = {
+    "query": "artificial intelligence companies",
+    "limitResults": 10
+}
+response = requests.post(url, headers=headers, json=data)
+result = response.json()
+print(result)
+```
+
+</CodeGroup>
+
+## Query Modes
+
+### Freeform Query
+
+Simple text-based search - just like using Google:
+
+```json
+{
+  "query": "latest developments in quantum computing 2024",
+  "limitResults": 15
+}
+```
+
+### Structured Query (LinkedIn Search)
+
+Use site prefixes for targeted searches:
+
+<CodeGroup>
+
+```bash curl
+curl -X POST https://api.resets.ai/api/search \
+  --header "content-type: application/json" \
+  --header "x-api-key: YOUR_API_KEY" \
+  --data '{
+    "query": "site:www.linkedin.com/company (artificial intelligence OR machine learning)",
+    "limitResults": 20
+}'
+```
+
+
+```javascript javascript
+const response = await fetch('https://api.resets.ai/api/search', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    query: "site:www.linkedin.com/company (artificial intelligence OR machine learning)",
+    limitResults: 20
+  })
+});
+const data = await response.json();
+console.log(data);
+```
+
+
+```python python
+import requests
+import json
+url = "https://api.resets.ai/api/search"
+headers = {
+    "Content-Type": "application/json",
+    "X-API-Key": "YOUR_API_KEY"
+}
+data = {
+    "query": "site:www.linkedin.com/company (artificial intelligence OR machine learning)",
+    "limitResults": 20
+}
+response = requests.post(url, headers=headers, json=data)
+result = response.json()
+print(result)
+```
+
+</CodeGroup>
+
+### Boolean Operators
+
+Combine terms with AND, OR, NOT:
+
+```json
+{
+  "query": "(AI OR artificial intelligence) AND healthcare NOT jobs",
+  "limitResults": 10
+}
+```
+
+## Request Parameters
+
+| Parameter          | Type    | Required | Default | Description                     |
+| ------------------ | ------- | -------- | ------- | ------------------------------- |
+| query              | string  | Yes      | -       | Search query (1-1000 chars)     |
+| limitResults       | integer | No       | 10      | Results to return (1-500)       |
+| date               | string  | No       | -       | Time filter: h, d, w, m, y      |
+| countryCode        | string  | No       | -       | ISO country code (us, uk, etc)  |
+| language           | string  | No       | -       | ISO language code (en, es, etc) |
+| startPublishedDate | string  | No       | -       | ISO date for range start        |
+| endPublishedDate   | string  | No       | -       | ISO date for range end          |
+| pageSummary        | object  | No       | -       | AI processing configuration     |
+
+## Advanced Parameters
+
+### Date Filtering
+
+Get recent results with simple time codes:
+
+<CodeGroup>
+
+```bash curl
+curl -X POST https://api.resets.ai/api/search \
+  --header "content-type: application/json" \
+  --header "x-api-key: YOUR_API_KEY" \
+  --data '{
+    "query": "AI funding rounds",
+    "limitResults": 10,
+    "date": "w"
+}'
+```
+
+
+```javascript javascript
+const response = await fetch('https://api.resets.ai/api/search', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    query: "AI funding rounds",
+    limitResults: 10,
+    date: "w"
+  })
+});
+const data = await response.json();
+console.log(data);
+```
+
+
+```python python
+import requests
+import json
+url = "https://api.resets.ai/api/search"
+headers = {
+    "Content-Type": "application/json",
+    "X-API-Key": "YOUR_API_KEY"
+}
+data = {
+    "query": "AI funding rounds",
+    "limitResults": 10,
+    "date": "w"
+}
+response = requests.post(url, headers=headers, json=data)
+result = response.json()
+print(result)
+```
+
+</CodeGroup>
+
+**Date codes:**
+
+- `h` - Past hour
+- `d` - Past 24 hours
+- `w` - Past week
+- `m` - Past month
+- `y` - Past year
+
+### Location & Language
+
+Target specific markets:
+
+```json
+{
+  "query": "machine learning startups",
+  "limitResults": 15,
+  "countryCode": "de",
+  "language": "en"
+}
+```
+
+### Date Range Filtering
+
+Precise date control:
+
+```json
+{
+  "query": "AI breakthroughs",
+  "limitResults": 20,
+  "startPublishedDate": "2024-01-01T00:00:00Z",
+  "endPublishedDate": "2024-12-31T23:59:59Z"
+}
+```
+
+## AI-Enhanced Search
+
+Add structured data extraction to any search:
+
+<CodeGroup>
+
+```bash curl
+curl -X POST https://api.resets.ai/api/search \
+  --header "content-type: application/json" \
+  --header "x-api-key: YOUR_API_KEY" \
+  --data '{
+    "query": "recent AI startup funding rounds",
+    "limitResults": 5,
+    "pageSummary": {
+        "prompt": "Extract funding details from each result",
+        "schema": {
+            "company": "string",
+            "amount": "string",
+            "investors": ["string"],
+            "stage": "string",
+            "description": "string"
+        }
+    }
+}'
+```
+
+
+```javascript javascript
+const response = await fetch('https://api.resets.ai/api/search', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    query: "recent AI startup funding rounds",
+    limitResults: 5,
+    pageSummary: {
+        prompt: "Extract funding details from each result",
+        schema: {
+            company: "string",
+            amount: "string",
+            investors: ["string"],
+            stage: "string",
+            description: "string"
+        }
+    }
+  })
+});
+const data = await response.json();
+console.log(data);
+```
+
+
+```python python
+import requests
+import json
+url = "https://api.resets.ai/api/search"
+headers = {
+    "Content-Type": "application/json",
+    "X-API-Key": "YOUR_API_KEY"
+}
+data = {
+    "query": "recent AI startup funding rounds",
+    "limitResults": 5,
+    "pageSummary": {
+        "prompt": "Extract funding details from each result",
+        "schema": {
+            "company": "string",
+            "amount": "string",
+            "investors": ["string"],
+            "stage": "string",
+            "description": "string"
+        }
+    }
+}
+response = requests.post(url, headers=headers, json=data)
+result = response.json()
+print(result)
+```
+
+</CodeGroup>
+
+## Response Structure
+
+### Standard Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "requestId": "550e8400-e29b-41d4-a716-446655440000",
+    "results": [
+      {
+        "title": "OpenAI Announces GPT-5",
+        "url": "https://openai.com/blog/gpt-5",
+        "snippet": "OpenAI unveiled GPT-5, its most advanced language model...",
+        "position": 1,
+        "dateTime": "2024-03-15T10:30:00Z",
+        "dateReference": "2 days ago"
+      }
+    ],
+    "metadata": {
+      "costCredits": 1,
+      "responseTime": 1.234,
+      "totalResults": 25,
+      "resultsRequested": 10
+    }
+  }
+}
+```
+
+### With AI Enhancement
+
+```json
+{
+  "success": true,
+  "data": {
+    "requestId": "550e8400-e29b-41d4-a716-446655440000",
+    "results": [
+      {
+        "title": "TechCo Raises $50M Series B",
+        "url": "https://techcrunch.com/techco-series-b",
+        "snippet": "AI startup TechCo announced $50M in Series B funding...",
+        "position": 1,
+        "pageSummary": {
+          "company": "TechCo",
+          "amount": "$50 million",
+          "investors": ["Sequoia Capital", "Andreessen Horowitz"],
+          "stage": "Series B",
+          "description": "AI platform for enterprise automation"
+        }
+      }
+    ],
+    "metadata": {
+      "costCredits": 2,
+      "responseTime": 2.156,
+      "pageSummaryProcessed": true,
+      "totalResults": 5
+    }
+  }
+}
+```
+
+## Common Search Patterns
+
+### Company Research
+
+```json
+{
+  "query": "site:www.linkedin.com/company openai",
+  "limitResults": 1,
+  "pageSummary": {
+    "prompt": "Extract company details",
+    "schema": {
+      "name": "string",
+      "industry": "string",
+      "size": "string",
+      "founded": "string",
+      "headquarters": "string",
+      "description": "string"
+    }
+  }
+}
+```
+
+### People Search
+
+```json
+{
+  "query": "site:www.linkedin.com/in (CEO OR founder) fintech San Francisco",
+  "limitResults": 20
+}
+```
+
+### News Monitoring
+
+```json
+{
+  "query": "artificial intelligence regulation",
+  "limitResults": 10,
+  "date": "d",
+  "pageSummary": {
+    "prompt": "Summarize key regulatory developments",
+    "schema": {
+      "headline": "string",
+      "summary": "string",
+      "impact": "string",
+      "region": "string"
+    }
+  }
+}
+```
+
+### Competitor Analysis
+
+```json
+{
+  "query": "(competitor1 OR competitor2 OR competitor3) AND (product launch OR announcement)",
+  "limitResults": 15,
+  "date": "m"
+}
+```
+
+## Best Practices
+
+<Info>
+  **Optimize Your Queries**
+
+  - Use specific terms for better results
+  - Leverage site: operators for domain-specific searches
+  - Combine boolean operators for precise filtering
+  - Set appropriate limitResults to balance cost and coverage
+</Info>
+
+<Warning>
+  **Rate Limits**
+
+  - Default: 5 requests per second
+  - Respect 429 responses and retry after delay
+</Warning>
+
+## Error Handling
+
+| Error Code            | Description                | Solution                          |
+| --------------------- | -------------------------- | --------------------------------- |
+| INVALID_QUERY_FORMAT  | Query is empty or too long | Ensure query is 1-1000 characters |
+| INVALID_LIMIT_RESULTS | limitResults out of range  | Use value between 1-500           |
+| INVALID_DATE_FORMAT   | Invalid date parameter     | Use h, d, w, m, or y              |
+| INSUFFICIENT_CREDITS  | Not enough credits         | Add credits to your account       |
+| RATE_LIMIT_EXCEEDED   | Too many requests          | Wait and retry                    |
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Extract API" icon="globe" href="/api/extract">
+    Learn how to extract content from specific URLs
+  </Card>
+  <Card title="AI Schemas" icon="brain" href="/guides/ai-schemas">
+    Design effective schemas for structured data
+  </Card>
+  <Card title="Advanced Search" icon="magnifying-glass-plus" href="/guides/advanced-search">
+    Master complex search patterns
+  </Card>
+  <Card title="Best Practices" icon="lightbulb" href="/guides/best-practices">
+    Optimize performance and reduce costs
+  </Card>
+</CardGroup>
