@@ -43,7 +43,9 @@
           {
             "group": "API Documentation",
             "pages": [
-              "api-reference"
+              "api-referecne/search",
+              "api-referecne/extract"
+
             ]
           }
         ]
