@@ -55,13 +55,13 @@
       "anchors": [
         {
           "anchor": "Playground",
-          "href": "https://playground.resets.ai",
+          "href": "https://resets.ai",
           "icon": "play"
         },
         {
-          "anchor": "API Status",
-          "href": "https://status.resets.ai",
-          "icon": "signal"
+          "anchor": "Website",
+          "href": "https://resets.ai",
+          "icon": "globe"
         },
         {
           "anchor": "Support",
