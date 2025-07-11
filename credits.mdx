@@ -7,35 +7,27 @@ description: "Understanding credit costs, usage tracking, and pricing plans"
 
 Simple, transparent pricing based on usage. Pay only for what you use.
 
+<Info>
+  We have two options for pricing Pay as You Go and Enteprise.  The price of 1 credit is \$0.01 
+</Info>
+
 ## How Credits Work
 
 Credits are the currency of our platform. Each API operation consumes credits based on complexity.
 
 ### Credit Costs
 
-| Operation               | Credits                | Description                                                                                    |
-| ----------------------- | ---------------------- | ---------------------------------------------------------------------------------------------- |
-| Search (Basic)          | 5 per 100 results      | Multi-engine search without AI                                                                 |
-| Search \+ Page Summary  | 5 per 100 results \+ 1 | Search with structured page summary extraction (limited to the first 25 results from the page) |
-| Extract (Basic)         | 1                      | URL content content extraction                                                                 |
-| Extract \+ Page Summary | 2                      | Extraction with AI processing                                                                  |
-| Failed Operations       | 0                      | No charge for failures                                                                         |
+| Operation                | Credits                   | Description                                                                 |
+| ------------------------ | ------------------------- | --------------------------------------------------------------------------- |
+| /search                  | 5 credits per 100 results | Multi-engine search                                                         |
+| /search AI Page Summary  | 1 credit                  | Extract page summary from search results. (limited to the first 25 results) |
+| /extract                 | 1 credit                  | Get all website contents  in markdown                                       |
+| /extract AI Page Summary | 1                         | Extract page summary from extract results                                   |
 
 #### Search Credit Examples
 
 - 100 results = 5 credits
 - 200 results = 10 credits
-
-### No Charge Policy
-
-<Info>
-  **You're only charged when operations succeed for most operations and service that support that feature**
-
-  - ❌ Failed extractions = 0 credits
-  - ❌ ✅  Inaccessible URLs = 0/1 credits
-  - ❌ Service errors = 0 credits
-  - ✅ Successful data returned = Credits charged
-</Info>
 
 ## Getting Started
 
@@ -61,8 +53,7 @@ New users receive **250 free credits** instantly:
 #### In the Playground
 
 - Credit count displayed in header
-- Updates in real-time
-- Shows after each operation
+- Updates in real-time after each operation
 
 #### Via API Response
 
@@ -82,7 +73,6 @@ Every API response includes credit usage:
 Track your credit consumption:
 
 - View in Activity Logs
-- Export usage reports
 - Monitor trends over time
 
 ## Credit Optimization
@@ -98,36 +88,7 @@ Track your credit consumption:
   - Use strctured json selectively
 </Tip>
 
-#### Cost-Effective Strategies
-
-```json
-// Test with minimal credits
-{
-  "query": "test query",
-  "limitResults": 10  // Only 1 credit
-}
-
-// Then scale up
-{
-  "query": "refined query",
-  "limitResults": 100  // 5 credits
-}
-```
-
-### Extract Optimization
-
-#### Single URL First
-
-Test extraction on one URL before batch processing:
-
-```json
-{
-  "url": "https://example.com",
-  "pageSummary": {
-    "schema": { "title": "string" }
-  }
-}
-```
+### 
 
 ## Plans & Billing
 
@@ -145,7 +106,6 @@ For high-volume users:
 
 - Custom credit packages
 - Dedicated support
-- SLA guarantees
 - Priority processing
 
 Contact [hello@resets.ai](mailto:sales@resets.ai) for details.
@@ -174,38 +134,6 @@ Yes\! 250 free credits for all new users.
 - API response metadata
 - Activity logs
 
-## Cost Examples
-
-### Lead Generation Campaign
-
-Find 1,000 LinkedIn companies with AI extraction:
-
-```
-Search: 1,000 results = 50 credits
-AI Processing: +1 credit
-Total: 51 credits
-```
-
-### Market Research Project
-
-Extract data from 50 competitor websites:
-
-```
-Extract: 50 URLs = 50 credits
-AI Processing: +50 credits
-Total: 100 credits
-```
-
-### News Monitoring (Daily)
-
-Track 100 news results daily for a month:
-
-```
-Daily: 100 results = 5 credits
-Monthly: 5 × 30 = 150 credits
-With AI: 150 + 30 = 180 credits
-```
-
 ## Tips for Credit Efficiency
 
 <Info>
@@ -229,6 +157,5 @@ With AI: 150 + 30 = 180 credits
 
   - Credits deducted immediately on success
   - No partial credit refunds
-  - Failed operations never charged
   - Monitor usage to avoid surprises
 </Warning>
