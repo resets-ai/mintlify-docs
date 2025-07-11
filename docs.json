@@ -84,14 +84,14 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Get API Key",
-      "href": "https://playground.resets.ai"
+      "label": "API Playground",
+      "href": "https://resets.ai"
     }
   },
   "footer": {
     "socials": {
+      "website":"https://www.resets.ai",
       "x": "https://x.com/resets_ai",
-      "github": "https://github.com/resets-ai",
       "linkedin": "https://linkedin.com/company/resets-ai"
     }
   }
