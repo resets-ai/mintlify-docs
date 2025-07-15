@@ -28,6 +28,13 @@
             ]
           },
           {
+            "group": "API Refefrence",
+            "pages": [
+              "api-reference/search",
+              "api-reference/extract"
+            ]
+          },
+          {
             "group": "Platform",
             "pages": [
               "playground",
