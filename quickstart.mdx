@@ -103,16 +103,28 @@ You'll receive results from multiple search engines combined:
       {
         "title": "OpenAI - Artificial Intelligence Research",
         "url": "https://openai.com",
-        "snippet": "OpenAI is an AI research and deployment company...",
+        "snippet": "OpenAI is an AI research and deployment company dedicated to ensuring that artificial general intelligence benefits all of humanity...",
         "position": 1,
-        "dateTime": "2024-01-15T10:30:00Z"
+        "rawPosition": 1
+      },
+      {
+        "title": "Anthropic - AI Safety Company",
+        "url": "https://www.anthropic.com",
+        "snippet": "Anthropic is an AI safety company working to build reliable, interpretable, and steerable AI systems. Creator of Claude AI assistant...",
+        "position": 2,
+        "rawPosition": 2
       }
     ],
-    "metadata": {
-      "costCredits": 1,
-      "responseTime": 1.523,
-      "totalResults": 10
-    }
+    "pageSummary": null
+  },
+  "metadata": {
+    "httpStatusCode": 200,
+    "requestId": "550e8400-e29b-41d4-a716-446655440000",
+    "responseTime": 1.523,
+    "costCredits": 5,
+    "pageSummaryProcessed": false,
+    "requestedResults": 10,
+    "totalResults": 25
   }
 }
 ```
@@ -175,18 +187,27 @@ Extract Response
 {
   "success": true,
   "data": {
-    "requestId": "650e8400-e29b-41d4-a716-446655440001",
-    "result": {
-      "url": "https://openai.com/about",
-      "title": "About OpenAI",
-      "content": "OpenAI is an AI research and deployment company...",
-      "extractedAt": "2024-01-15T10:32:00Z",
-      "processingTime": 0.823
-    }
+    "requestId": "2e983dd7-7fa5-4d67-b0f8-3cc715ad6",
+    "results": [
+      {
+        "url": "https://openai.com/about",
+        "content": "About AI as the greatest source of empowerment for all Company Jul 21, 2025...",
+        "title": "About",
+        "extractedAt": "2025-07-24T21:34:13.668Z",
+        "processingTime": 4676
+      }
+    ]
   },
   "metadata": {
+    "timestamp": "2025-07-24T21:34:14.587Z",
+    "extractedAt": "2025-07-24T21:34:13.668Z",
     "costCredits": 1,
-    "responseTime": 0.823,
+    "httpStatusCode": 200,
+    "requestId": "2e983dd7-7fa5-4d67-b0f8-3cd71b5ad6",
+    "responseTime": 5.712,
+    "pageSummaryProcessed": false,
+    "requestedResults": 1,
+    "totalResults": 1,
     "domain": "openai.com"
   }
 }
